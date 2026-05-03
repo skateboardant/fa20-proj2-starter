@@ -106,18 +106,69 @@ class TestDot(TestCase):
     def test_simple(self):
         t = AssemblyTest(self, "dot.s")
         # create arrays in the data section
-        raise NotImplementedError("TODO")
-        # TODO
+        array0 = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        array1 = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
         # load array addresses into argument registers
-        # TODO
+        t.input_array("a0", array0)
+        t.input_array("a1", array1)
         # load array attributes into argument registers
-        # TODO
+        t.input_scalar("a2", 9)
+        t.input_scalar("a3", 1)
+        t.input_scalar("a4", 1)
         # call the `dot` function
         t.call("dot")
         # check the return value
-        # TODO
+        t.check_scalar("a0", 285)
         t.execute()
 
+    def test_len_zero(self):
+        t = AssemblyTest(self, "dot.s")
+        array0 = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        array1 = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        t.input_array("a0", array0)
+        t.input_array("a1", array1)
+        t.input_scalar("a2", 0)
+        t.input_scalar("a3", 1)
+        t.input_scalar("a4", 1)
+        t.call("dot")
+        t.execute(code=75)
+
+    def test_stride_zero1(self):
+        t = AssemblyTest(self, "dot.s")
+        array0 = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        array1 = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        t.input_array("a0", array0)
+        t.input_array("a1", array1)
+        t.input_scalar("a2", 9)
+        t.input_scalar("a3", 0)
+        t.input_scalar("a4", 1)
+        t.call("dot")
+        t.execute(code=76)
+
+    def test_stride_zero2(self):
+        t = AssemblyTest(self, "dot.s")
+        array0 = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        array1 = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        t.input_array("a0", array0)
+        t.input_array("a1", array1)
+        t.input_scalar("a2", 9)
+        t.input_scalar("a3", 1)
+        t.input_scalar("a4", 0)
+        t.call("dot")
+        t.execute(code=76)
+
+    def test_multiple(self):
+        t = AssemblyTest(self, "dot.s")
+        array0 = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        array1 = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        t.input_array("a0", array0)
+        t.input_array("a1", array1)
+        t.input_scalar("a2", 3)
+        t.input_scalar("a3", 1)
+        t.input_scalar("a4", 2)
+        t.call("dot")
+        t.check_scalar("a0", 22)
+        t.execute()
     @classmethod
     def tearDownClass(cls):
         print_coverage("dot.s", verbose=False)
