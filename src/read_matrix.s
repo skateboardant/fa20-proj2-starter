@@ -27,16 +27,14 @@
 read_matrix:
 
     # Prologue
-    addi sp, sp, -36
+    addi sp, sp, -24
     sw ra, 0(sp)
     sw s0, 4(sp)
     sw s1, 8(sp)
     sw s2, 12(sp)
     sw s3, 16(sp)
     sw s4, 20(sp)
-    sw s5, 24(sp)
-    sw s6, 28(sp)
-    sw s7, 32(sp)
+
     mv s0, a0
     mv s1, a1
     mv s2, a2	
@@ -98,10 +96,7 @@ read_matrix:
     lw s2, 12(sp)
     lw s3, 16(sp)
     lw s4, 20(sp)
-    lw s5, 24(sp)
-    lw s6, 28(sp)
-    lw s7, 32(sp)
-    addi sp, sp, 36
+    addi sp, sp, 24
     ret
 
 error88:
