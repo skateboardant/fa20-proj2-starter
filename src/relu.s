@@ -43,9 +43,10 @@ loop_end:
 	ret
     
 exit:
-    li a0, 17
     li a1, 78
-    ecall
+    jal exit2
+
 rectifier:
     sw x0, 0(t3)
     j loop_continue
+

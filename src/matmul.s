@@ -108,16 +108,14 @@ outer_loop_end:
     ret
 
 exit72:
-    li a0 ,17
     li a1, 72
-    ecall
+    jal exit2
     
 exit73:
-    li a0, 17
     li a1, 73
-    ecall
+    jal exit2
     
 exit74:
-    li a0, 17
     li a1, 74
-    ecall
+    jal exit2
+

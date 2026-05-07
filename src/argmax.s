@@ -53,6 +53,6 @@ change:
     j loop_continue
     
 exit:
-    li a0, 17
     li a1, 77
-    ecall
+    jal exit2
+

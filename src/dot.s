@@ -60,11 +60,10 @@ loop_end:
     ret
 
 exit75:
-    li a0, 17
     li a1, 75
-    ecall
+    jal exit2
 
 exit76:
-    li a0, 17
     li a1, 76
-    ecall
+    jal exit2
+
